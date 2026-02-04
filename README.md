@@ -26,7 +26,13 @@ MCP server for the [FeatureBase](https://featurebase.app) REST API. Gives any MC
 
 ## Setup
 
-### 1. Clone and build
+### Option A: npx (no clone needed)
+
+```bash
+npx @gkpacker/featurebase-mcp --api-key your_api_key_here
+```
+
+### Option B: Clone and build
 
 ```bash
 git clone https://github.com/gkpacker/featurebase-mcp.git
@@ -35,18 +41,18 @@ npm install
 npm run build
 ```
 
-### 2. Get your API key
+### Get your API key
 
 Go to your FeatureBase dashboard → **Settings** → **API** → copy your API key.
 
-### 3. Configure your MCP client
+### Configure your MCP client
 
 #### Claude Code
 
 ```bash
 claude mcp add featurebase-mcp \
   -e FEATUREBASE_API_KEY=your_api_key_here \
-  -- node /absolute/path/to/featurebase-mcp/build/index.js
+  -- npx -y @gkpacker/featurebase-mcp
 ```
 
 To also enable slug resolution and similar posts (requires your org URL):
@@ -55,7 +61,7 @@ To also enable slug resolution and similar posts (requires your org URL):
 claude mcp add featurebase-mcp \
   -e FEATUREBASE_API_KEY=your_api_key_here \
   -e FEATUREBASE_ORG_URL=https://yourorg.featurebase.app \
-  -- node /absolute/path/to/featurebase-mcp/build/index.js
+  -- npx -y @gkpacker/featurebase-mcp
 ```
 
 #### Claude Desktop
@@ -66,8 +72,8 @@ Add to your `claude_desktop_config.json`:
 {
   "mcpServers": {
     "featurebase": {
-      "command": "node",
-      "args": ["/absolute/path/to/featurebase-mcp/build/index.js"],
+      "command": "npx",
+      "args": ["-y", "@gkpacker/featurebase-mcp"],
       "env": {
         "FEATUREBASE_API_KEY": "your_api_key_here",
         "FEATUREBASE_ORG_URL": "https://yourorg.featurebase.app"
@@ -82,7 +88,7 @@ Add to your `claude_desktop_config.json`:
 Follow your client's MCP server configuration docs. The server runs on **stdio** transport. The command is:
 
 ```bash
-node /absolute/path/to/featurebase-mcp/build/index.js
+npx -y @gkpacker/featurebase-mcp
 ```
 
 Environment variables:

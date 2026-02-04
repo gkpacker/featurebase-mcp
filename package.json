@@ -1,5 +1,5 @@
 {
-  "name": "featurebase-mcp",
+  "name": "@gkpacker/featurebase-mcp",
   "version": "0.1.0",
   "description": "MCP server for the FeatureBase REST API",
   "type": "module",
@@ -7,13 +7,21 @@
   "bin": {
     "featurebase-mcp": "build/index.js"
   },
+  "files": [
+    "build/"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node build/index.js",
-    "dev": "tsx src/index.ts"
+    "dev": "tsx src/index.ts",
+    "prepublishOnly": "npm run build"
   },
-  "keywords": ["mcp", "featurebase", "feedback", "changelog"],
+  "keywords": ["mcp", "featurebase", "feedback", "changelog", "help-center", "conversations"],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gkpacker/featurebase-mcp.git"
+  },
   "engines": {
     "node": ">=18.0.0"
   },
