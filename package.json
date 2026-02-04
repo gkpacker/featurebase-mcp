@@ -1,0 +1,29 @@
+{
+  "name": "featurebase-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for the FeatureBase REST API",
+  "type": "module",
+  "main": "build/index.js",
+  "bin": {
+    "featurebase-mcp": "build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "tsx src/index.ts"
+  },
+  "keywords": ["mcp", "featurebase", "feedback", "changelog"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "json-mask": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "tsx": "^4.0.0"
+  }
+}
