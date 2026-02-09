@@ -45,6 +45,10 @@ import type {
   CreateArticleData,
   GetArticleParams,
   UpdateArticleData,
+  ListSurveysParams,
+  Survey,
+  SurveyResponse,
+  GetSurveyResponsesParams,
 } from "./types.js";
 
 interface RequestOptions {
@@ -355,6 +359,22 @@ export class FeaturebaseClient implements IFeaturebaseClient {
   async deleteArticle(id: string): Promise<unknown> {
     return this.request("DELETE", `/help_center/articles/${encodeURIComponent(id)}`, {
       extraHeaders: FeaturebaseClient.NOVA_HEADERS,
+    });
+  }
+
+  // ── Surveys ──────────────────────────────────────────────────────────────
+
+  async listSurveys(params?: ListSurveysParams): Promise<CursorPaginatedResponse<Survey>> {
+    return this.request("GET", "/surveys", { params: params as unknown as Record<string, unknown> });
+  }
+
+  async getSurvey(id: string): Promise<Survey> {
+    return this.request("GET", `/surveys/${encodeURIComponent(id)}`);
+  }
+
+  async getSurveyResponses(id: string, params?: GetSurveyResponsesParams): Promise<CursorPaginatedResponse<SurveyResponse>> {
+    return this.request("GET", `/surveys/${encodeURIComponent(id)}/responses`, {
+      params: params as unknown as Record<string, unknown>,
     });
   }
 

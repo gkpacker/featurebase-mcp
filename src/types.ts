@@ -84,6 +84,11 @@ export interface FeaturebaseClient {
   updateArticle(id: string, data: UpdateArticleData): Promise<Article>;
   deleteArticle(id: string): Promise<unknown>;
 
+  // Surveys
+  listSurveys(params?: ListSurveysParams): Promise<CursorPaginatedResponse<Survey>>;
+  getSurvey(id: string): Promise<Survey>;
+  getSurveyResponses(id: string, params?: GetSurveyResponsesParams): Promise<CursorPaginatedResponse<SurveyResponse>>;
+
   // Utility (v1 API via org URL)
   resolvePostSlug(slug: string): Promise<Post>;
   findSimilarPosts(query: string, locale?: string): Promise<Post[]>;
@@ -576,4 +581,52 @@ export interface UpdateArticleData {
   authorId?: string;
   state?: "draft" | "live";
   translations?: Record<string, unknown>;
+}
+
+// ── Surveys ───────────────────────────────────────────────────────────────
+
+export interface SurveyPage {
+  type: string;
+  title: string;
+  description?: string;
+  logic?: Record<string, unknown>;
+  defaultAction?: Record<string, unknown>;
+}
+
+export interface Survey {
+  id: string;
+  title: string;
+  description: string;
+  isActive: boolean;
+  responseCount: number;
+  targeting: Record<string, unknown>;
+  pages: SurveyPage[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SurveyResponseEntry {
+  pageId: string;
+  type: string;
+  value: unknown;
+}
+
+export interface SurveyResponse {
+  id: string;
+  user: Record<string, unknown> | null;
+  responses: SurveyResponseEntry[];
+  createdAt: string;
+}
+
+export interface ListSurveysParams {
+  limit?: number;
+  cursor?: string;
+  type?: string;
+  isActive?: boolean;
+}
+
+export interface GetSurveyResponsesParams {
+  pageId?: string;
+  limit?: number;
+  cursor?: string;
 }

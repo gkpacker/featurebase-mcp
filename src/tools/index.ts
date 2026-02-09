@@ -10,9 +10,10 @@ import * as users from "./users.js";
 import * as customFields from "./custom-fields.js";
 import * as conversations from "./conversations.js";
 import * as helpCenter from "./help-center.js";
+import * as surveys from "./surveys.js";
 import * as utility from "./utility.js";
 
-const modules = [posts, upvoters, comments, changelogs, subscribers, users, customFields, conversations, helpCenter, utility];
+const modules = [posts, upvoters, comments, changelogs, subscribers, users, customFields, conversations, helpCenter, surveys, utility];
 
 export function getAllTools(): Tool[] {
   return modules.flatMap((m) => m.tools);
